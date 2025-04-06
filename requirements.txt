@@ -3,3 +3,8 @@ uvicorn
 joblib
 scikit-learn
 jinja2
+radon
+pandas
+numpy
+xgboost
+python-multipart

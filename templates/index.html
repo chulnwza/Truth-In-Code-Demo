@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Code Origin Classifier</title>
+</head>
+<body>
+  <h1>🔍 ทำนายว่าโค้ดนี้มาจาก AI หรือ มนุษย์</h1>
+  <form id="predict-form">
+    <textarea name="code" rows="20" cols="80" placeholder="วางโค้ดที่นี่..."></textarea><br>
+    <button type="submit">ทำนาย</button>
+  </form>
+  <h2 id="result"></h2>
+
+  <script>
+    const form = document.getElementById('predict-form');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const response = await fetch('/predict', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await response.json();
+      console.log(data);  // ⬅️ เพิ่มบรรทัดนี้
+      result.textContent = "🔎 ผลลัพธ์: โค้ดนี้น่าจะมาจาก " + data.prediction;
+    });
+  </script>
+</body>
+</html>
