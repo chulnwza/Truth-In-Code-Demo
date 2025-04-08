@@ -2,15 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Code Origin Classifier</title>
+  <title>Truth in Code</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Prompt', sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(6px);
+      width: 90%;
+      max-width: 800px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    textarea {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      resize: vertical;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      line-height: 1.4;
+    }
+    textarea::placeholder {
+      color: #bbb;
+    }
+    button {
+      display: block;
+      margin: 1rem auto 0;
+      padding: 0.7rem 2rem;
+      font-size: 1rem;
+      background-color: #00c6ff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #007c9e;
+    }
+    #result {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      color: #ffeb3b;
+    }
+  </style>
 </head>
 <body>
-  <h1>🔍 ทำนายว่าโค้ดนี้มาจาก AI หรือ มนุษย์</h1>
-  <form id="predict-form">
-    <textarea name="code" rows="20" cols="80" placeholder="วางโค้ดที่นี่..."></textarea><br>
-    <button type="submit">ทำนาย</button>
-  </form>
-  <h2 id="result"></h2>
+  <div class="container">
+    <h1>🔍 ทำนายว่าโค้ดนี้มาจาก ChatGPT หรือ มนุษย์</h1>
+    <form id="predict-form">
+      <textarea name="code" rows="15" placeholder="วางโค้ด Python ของคุณที่นี่..."></textarea><br>
+      <button type="submit">ทำนาย</button>
+    </form>
+    <h2 id="result"></h2>
+  </div>
 
   <script>
     const form = document.getElementById('predict-form');
@@ -24,7 +91,7 @@
         body: formData
       });
       const data = await response.json();
-      console.log(data);  // ⬅️ เพิ่มบรรทัดนี้
+      console.log(data);
       result.textContent = "🔎 ผลลัพธ์: โค้ดนี้น่าจะมาจาก " + data.prediction;
     });
   </script>
